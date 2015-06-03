@@ -1,0 +1,17 @@
+{
+  "name": "map-slicer",
+  "version": "0.0.0",
+  "directory": "public/components",
+  "dependencies": {
+    "async": "*",
+    "leaflet": "~>0.7",
+    "leaflet.draw": "*",
+    "leaflet-utfgrid": "danzel/Leaflet.utfgrid",
+    "leaflet-loading": "ebrelsford/Leaflet.loading"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}

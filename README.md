@@ -1,1 +1,2 @@
-# map-distribution-slicer
+Species Distribution Time Slice Map
+==================================
