@@ -191,7 +191,7 @@ module.exports = IDBMap =  function(elid, options, popupContent){
     var idbquery,utf8grid,legend;
     var mapapi = idbapi.host+"mapping/";
     
-    this.query = function(query){
+    this.query = function(query,dates,yearInterval){
         idbquery=query;
         _query();
     }

@@ -1,12 +1,16 @@
 {
-  "name": "growpodcast_player",
-  "description": "iDigBio Portal",
+  "name": "Map Distribution Slicer",
+  "description": "Time slices species distribution queries",
   "version": "5.0.0",
-  "author": "Greg Traub <greg.growradio@gmail.com>",
+  "author": "Greg Traub <gtraub@acis.ufl.edu>",
   "contributors": [
     {
       "name": "Greg Traub",
-      "email": "greg.growradio@gmail.com"
+      "email": "gtraub@acis.ufl.edu"
+    },
+    {
+      "name": "Joel Ramirez",
+      "email": "joel.ramirez001@gmail.com"
     }
   ],
   "scripts": {
