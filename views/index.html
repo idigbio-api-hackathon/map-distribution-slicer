@@ -3,14 +3,39 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Map Species Distribution Time Slicer</title>
-
   <!-- CSS  -->
   <script src="/js/main.js"></script>
   <link href="/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/css/leaflet.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+    <div id="search">
+
+        <form id="mapping">
+
+        <label>Species</label>
+        <input id='species'>
+
+        <label>Genus </label>
+        <input id='genus'>
+
+        <label>Family</label>
+        <input id= 'family'>
+
+        <label>Date Range:</label>
+        <input id='date_1'> To <input id="date_2">
+
+        <button value="submit">Submit</button>
+
+        </form>
+
+    </div>
+
     <div id="controls"></div>
     <div id="map"></div>
+
+
+
+
 </body>
 </html>
