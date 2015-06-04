@@ -25065,10 +25065,12 @@ module.exports = IDBMap =  function(elid, options, popupContent){
     }
 
     var querySlices = function(queries){
-        var layers={}, color = chroma.scale('RdYlBu'), cnt=1;
+        var layers={}, color = chroma.scale('RdYlBu'), cnt=1, colors={};
         var split = 1/queries.length;
         async.eachSeries(queries,function(q,callback){
-            var full = JSON.stringify({rq: q, type: 'auto', threshold: 100000, style: {pointScale: [color(split*cnt).hex()], fill: '#f33',stroke: 'rgb(229,245,249,.8)'}});
+            var c = color(split*cnt).hex(),key='<b>'+q.datecollected.gte+'</b> - <b>'+q.datecollected.lte+'</b>';
+            colors[c]=key;
+            var full = JSON.stringify({rq: q, type: 'auto', threshold: 100000, style: {pointScale: [c], fill: '#f33',stroke: 'rgb(229,245,249,.8)'}});
             cnt+=1;
             console.log(full)
             $.ajax(mapapi,{
@@ -25076,7 +25078,7 @@ module.exports = IDBMap =  function(elid, options, popupContent){
                 success: function(resp){
                     var l = L.tileLayer(resp.tiles,{minZoom: 0});
                    self.map.addLayer(l);
-                   layers[q.datecollected.gte+' - '+q.datecollected.lte]=l;
+                   layers['<span style="background-color:'+c+'" class="layer-color"></span>'+key]=l;
                    callback();
                 },
                 dataType: 'json',
@@ -25086,51 +25088,18 @@ module.exports = IDBMap =  function(elid, options, popupContent){
             })            
         },function(err){
             L.control.layers(baseLayer, layers).addTo(self.map);
+            makeLegend(colors);
         });
     }
-
-    var _query = _.debounce(function(){
-        var query = {rq: idbquery, type: 'auto', threshold: 100000, style: {fill: '#f33',stroke: 'rgb(229,245,249,.8)'}};
-        var q = JSON.stringify(query), d = new Date;
-        var time = d.getTime();
-        self.currentQueryTime=time;
-
-        $.ajax(mapapi,{
-            data: q,
-            success: function(resp){
-                //console.log(resp.shortCode)
-                //make sure last query run is the last one that renders
-                //as responses can be out of order
-                //mapCode = resp.shortCode;
-                self.map.mapCode = resp.shortCode;
-                self.map.resp=resp;
-                if(time>=self.currentQueryTime){
-                    /*if(typeof legend == 'object'){
-                        //self.map.removeControl(legend);
-                        legend.removeFrom(self.map)
-                    }
-                    legend = new legendPanel();
-                    self.map.addControl(legend);*/
-                    if(typeof idblayer == 'object'){
-                        self.map.removeLayer(removeIdblayer());
-                    }
-                    self.map.addLayer(makeIdblayer(resp.tiles));
-                    if(typeof utf8grid == 'object'){
-                        self.map.removeLayer(utf8grid);
-                    }
-                    utf8grid = L.utfGrid(resp.utf8grid,{
-                        useJsonP: false
-                    });
-                    self.map.addLayer(utf8grid);
-                }
-            },
-            dataType: 'json',
-            contentType: 'application/json',
-            type: 'POST',
-            crossDomain: true
-        })
-    }, 100,{'leading': false, 'trailing': true});
     
+    var makeLegend = function(keys){
+        var div='<div id="legend-block">';
+        _.each(keys,function(v,k){
+            div+='<div><span class="color" style="background-color:'+k+'"></span><span class="range">'+v+'</span></div>';
+        });
+        div+='</div>';
+        $('#legend').html(div);
+    }
     /*
     * Event Actions
     ***/

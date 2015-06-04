@@ -1,4 +1,41 @@
+#search {
+  padding-bottom: 50px;
+}
+label {
+  clear: both;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+}
+input[type="text"] {
+  background: #fff;
+  border: 1px solid #8ABCCF;
+  border-radius: 4px;
+  color: black;
+  clear: both;
+  display: block;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  float: left;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  width: 150px;
+  outline: none;
+  padding: 10px;
+  height: 50px;
+}
 #map {
   width: 800px;
   height: 500px;
+}
+#legend-block .color {
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+}
+.layer-color {
+  display: inline-block;
+  width: 12px;
+  height: 10px;
 }
