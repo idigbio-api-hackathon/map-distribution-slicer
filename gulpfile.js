@@ -33,12 +33,7 @@ gulp.task('default',function(){
     gulp.watch(['views/*','public/js/main.js','public/css/*']).on('change',livereload.changed);
 
     //build less css changes
-    gulp.watch('public/map/less/**').on('change', function(){
-        return gulp.src('./public/map/less/**/*.less')
-        .pipe(less({
-            paths: [ path.join(__dirname, 'less', 'includes') ]
-        }))
-        .pipe(gulp.dest('./public/css'));
-    })
+    //*gulp.watch('public/map/less/**').on('change', function(){
+
     return rebundle();
 });

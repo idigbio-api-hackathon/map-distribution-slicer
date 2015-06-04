@@ -25135,12 +25135,8 @@ module.exports = IDBMap =  function(elid, options, popupContent){
 
 
 
-var mapper = require('./lib/map');
+window.mapper = require('./lib/map');
 window.$ = require('jquery');
 var _ = require('lodash');
 
-$(document).ready(function(){
-	var map = new mapper('map');
-	map.query({"genus":"acer"}, ['1976-1-10','1999'], 5);
-})
 },{"./lib/map":8,"jquery":3,"lodash":5}]},{},[9])
