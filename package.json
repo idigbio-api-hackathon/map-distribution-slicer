@@ -1,5 +1,5 @@
 {
-  "name": "Map Distribution Slicer",
+  "name": "MapDistributionSlicer",
   "description": "Time slices species distribution queries",
   "version": "5.0.0",
   "author": "Greg Traub <gtraub@acis.ufl.edu>",
@@ -34,7 +34,8 @@
     "react": "*",
     "request": "*",
     "less": "*",
-    "leaflet": "*"
+    "leaflet": "*",
+    "chroma-js": "*"
   },
   "devDependencies": {
     "assert": "*",
