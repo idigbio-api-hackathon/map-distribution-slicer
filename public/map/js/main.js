@@ -10,8 +10,6 @@
 *  map.query({"genus":"acer"},['1902-10-3','1999'],5);
 ****/
 
-
-
 window.mapper = require('./lib/map');
 window.$ = require('jquery');
 var _ = require('lodash');

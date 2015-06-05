@@ -1,7 +1,7 @@
 #search {
   padding-bottom: 50px;
 }
-label {
+#search label {
   clear: both;
   display: block;
   font-size: 16px;
@@ -29,6 +29,9 @@ input[type="text"] {
   width: 800px;
   height: 500px;
 }
+#legend{
+  width:800px;
+}
 #legend-block .color {
   display: inline-block;
   width: 30px;
@@ -38,4 +41,7 @@ input[type="text"] {
   display: inline-block;
   width: 12px;
   height: 10px;
+}
+.color-block{
+  float:left;
 }

@@ -6,7 +6,8 @@
     "async": "*",
     "leaflet": "~>0.7",
     "leaflet.draw": "*",
-    "leaflet-utfgrid": "danzel/Leaflet.utfgrid"
+    "leaflet-utfgrid": "danzel/Leaflet.utfgrid",
+    "layer-control": "elesdoar/leaflet-control-orderlayers"
   },
   "ignore": [
     "**/.*",

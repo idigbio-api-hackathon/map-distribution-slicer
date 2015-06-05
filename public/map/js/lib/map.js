@@ -4,7 +4,8 @@ var $ = require('jquery');
 var _ = require('lodash');
 var async = require('async');
 //require('../../../../bower_components/leaflet-utfgrid/dist/leaflet.utfgrid');
-//require('../../../../bower_components/leaflet-loading/src/Control.Loading');
+require('../../../../bower_components/leaflet-loading/src/Control.Loading');
+//require('../../../../bower_components/layer-control/leaflet.control.orderlayers.min');
 var idbapi = require('./idbapi');
 var chroma = require('chroma-js');
 
@@ -33,8 +34,8 @@ module.exports = IDBMap =  function(elid, options, popupContent){
         scrollWheelZoom: true,
         boxZoom: true,
         zoomControl: true,
-        worldCopyJump: true//,
-        ///loadingControl: true
+        worldCopyJump: true,
+        oadingControl: true
     };
 
     if(typeof options == 'object'){
@@ -108,22 +109,32 @@ module.exports = IDBMap =  function(elid, options, popupContent){
         });
         querySlices(queries);
     }
-
+    var layerGroup=L.layerGroup();
+    layerGroup.addTo(self.map);
+    var layerControl = L.control.layers(baseLayer);
+    layerControl.addTo(self.map);
+    var layers=[];
     var querySlices = function(queries){
-        var layers={}, color = chroma.scale('RdYlBu'), cnt=1, colors={};
+        layers.forEach(function(l){
+            layerControl.removeLayer(l);
+        })
+        var  color = chroma.scale('RdYlBu'), cnt=1, colors={};
         var split = 1/queries.length;
+        layerGroup.clearLayers();
         async.eachSeries(queries,function(q,callback){
             var c = color(split*cnt).hex(),key='<b>'+q.datecollected.gte+'</b> - <b>'+q.datecollected.lte+'</b>';
             colors[c]=key;
-            var full = JSON.stringify({rq: q, type: 'auto', threshold: 100000, style: {pointScale: [c], fill: '#f33',stroke: 'rgb(229,245,249,.8)'}});
+            var full = JSON.stringify({rq: q, type: 'auto', threshold: 100000, style: {scale: [c], pointScale: [c], fill: '#f33',stroke: 'rgb(229,245,249,.8)'}});
             cnt+=1;
             console.log(full)
             $.ajax(mapapi,{
                 data: full,
                 success: function(resp){
-                    var l = L.tileLayer(resp.tiles,{minZoom: 0});
-                   self.map.addLayer(l);
-                   layers['<span style="background-color:'+c+'" class="layer-color"></span>'+key]=l;
+                   var l = L.tileLayer(resp.tiles,{minZoom: 0});
+                   layerGroup.addLayer(l);
+                   layerControl.addOverlay(l,'<span style="background-color:'+c+'" class="layer-color"></span>'+key);
+                   //layers['<span style="background-color:'+c+'" class="layer-color"></span>'+key]=l;
+                   layers.push(l);
                    callback();
                 },
                 dataType: 'json',
@@ -132,7 +143,6 @@ module.exports = IDBMap =  function(elid, options, popupContent){
                 crossDomain: true
             })            
         },function(err){
-            L.control.layers(baseLayer, layers).addTo(self.map);
             makeLegend(colors);
         });
     }
@@ -140,7 +150,7 @@ module.exports = IDBMap =  function(elid, options, popupContent){
     var makeLegend = function(keys){
         var div='<div id="legend-block">';
         _.each(keys,function(v,k){
-            div+='<div><span class="color" style="background-color:'+k+'"></span><span class="range">'+v+'</span></div>';
+            div+='<div class="color-block"><span class="color" style="background-color:'+k+'"></span><span class="range">'+v+'</span></div>';
         });
         div+='</div>';
         $('#legend').html(div);
