@@ -15,7 +15,8 @@
       {
           var map = new mapper('map');
           $('#submitbutton').click(function(e){
-              e.preventDefault();
+                  e.preventDefault();
+              
               var genus = document.getElementById("genus").value;
               var family = document.getElementById("family").value;
               var species = document.getElementById("species").value;
@@ -31,6 +32,7 @@
 
               $( "#date_1" ).datepicker({
                   dateFormat: 'yy-mm-dd',
+                  yearRange: "1900:2015",
                   defaultDate: "+1w",
                   changeMonth: true,
                   changeYear: true,
@@ -41,6 +43,7 @@
               });
               $( "#date_2" ).datepicker({
                   dateFormat: 'yy-mm-dd',
+                  yearRange: "1900:2015",
                   defaultDate: "+1w",
                   changeMonth: true,
                   changeYear: true,
@@ -53,33 +56,39 @@
 
 
 
+
+
+
+
       })
   </script>
 </head>
 <body>
 
     <div id="header">
-        <img id="logo" src="https://www.idigbio.org/sites/default/files/idigbio_logo_0.png" alt="iDigBio" border="0" id="logo">
+        <img id="logo" src="https://www.idigbio.org/sites/default/files/idigbio_logo_0.png" alt="iDigBio" border="0">
     </div>
 
-    <div style="padding-top:50px" class="container">
+    <div style="padding-top:75px" class="container">
+
+        <div class="title">Map Species Distribution</div>
 
         <form id="mapping">
 
         <label>Species</label>
-        <input class="input" id='species'>
+        <input class="input" id='species' required>
 
         <label>Genus </label>
-        <input class="input" id='genus'>
+        <input class="input" id='genus' required>
 
         <label>Family</label>
         <input class="input" id= 'family'>
 
         <label>Date Range</label><br>
          From:
-        <input class="input" id='date_1'><br>
+        <input class="input" id='date_1' required><br>
          To:
-        <input class="input" id="date_2">
+        <input class="input" id="date_2" required>
 
         <br>
 
@@ -95,9 +104,6 @@
 
     </div>
 
-    <!--<div id="controls"></div>-->
-    <!--<div id="map"></div>-->
-    <!--<div id="legend"></div>-->
 
 </body>
 </html>
