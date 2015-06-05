@@ -5,6 +5,9 @@
   <title>Map Species Distribution Time Slicer</title>
   <!-- CSS  -->
   <script src="/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
   <link href="/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/css/leaflet.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
@@ -13,46 +16,97 @@
       {
           var map = new mapper('map');
           $('#submitbutton').click(function(e){
-              e.preventDefault();
+                  e.preventDefault();
+
               var genus = document.getElementById("genus").value;
               var family = document.getElementById("family").value;
               var species = document.getElementById("species").value;
-              var date1 = document.getElementById("date_1").value;
-              var date2 = document.getElementById("date_2").value;
+              var initial_date = document.getElementById("initial_date").value;
+              var end_date = document.getElementById("end_date").value;
+              var years = document.getElementById("years").value
+
+              if(initial_date =="" && end_date=="") {
+                  alert("Please enter a date range.")
+                  return false;
+              }
               
               var q = {"genus":genus, "family":family, "specificepithet":species};
               
-              map.query(q, [date1,date2],5);
+              map.query(q, [initial_date,end_date],parseInt(years));
+
           });
+
+
+              $( "#initial_date" ).datepicker({
+                  dateFormat: 'yy-mm-dd',
+                  yearRange: "1900:2015",
+                  defaultDate: "+1w",
+                  changeMonth: true,
+                  changeYear: true,
+                  numberOfMonths: 1,
+                  onClose: function( selectedDate ) {
+                      $( "#initial_date" ).datepicker( "option", "minDate", selectedDate );
+                  }
+              });
+              $( "#end_date" ).datepicker({
+                  dateFormat: 'yy-mm-dd',
+                  yearRange: "1900:2015",
+                  defaultDate: "+1w",
+                  changeMonth: true,
+                  changeYear: true,
+                  numberOfMonths: 1,
+                  onClose: function( selectedDate ) {
+                      $( "#end_date" ).datepicker( "option", "maxDate", selectedDate );
+                  }
+              });
+
       })
   </script>
 </head>
 <body>
-    <div id="search">
+
+    <div id="header">
+        <img id="logo" src="https://www.idigbio.org/sites/default/files/idigbio_logo_0.png" alt="iDigBio" border="0">
+    </div>
+
+    <div style="padding-top:75px" class="container">
+
+        <div class="title">Map Species Distribution</div>
 
         <form id="mapping">
 
         <label>Species</label>
-        <input id='species'>
+        <input class="input" id='species'>
 
         <label>Genus </label>
-        <input id='genus'>
+        <input class="input" id='genus'>
 
         <label>Family</label>
-        <input id= 'family'>
+        <input class="input" id= 'family'>
 
-        <label>Date Range:</label>
-        <input id='date_1'> To <input id="date_2">
+        <label>From:</label>
+        <input class="input" id='initial_date'>
+
+        <label>To:</label>
+        <input class="input" id="end_date">
+
+        <label>Amount of Years:</label>
+        <input class="input" id="years">
+
+        <br>
 
         <button id="submitbutton" value="submit">Submit</button>
+        <br>
 
         </form>
 
+        <div id="controls"></div>
+        <div id="map"></div>
+        <div id="legend"></div>
+
+
     </div>
 
-    <div id="controls"></div>
-    <div id="map"></div>
-    <div id="legend"></div>
 
 </body>
 </html>
