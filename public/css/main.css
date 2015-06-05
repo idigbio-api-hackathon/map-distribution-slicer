@@ -47,6 +47,15 @@ button
 }
 
 
+#header
+{
+    background: #272727;
+    padding-top: 0;
+    font: 14px/21px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
 #map {
   width: 800px;
   height: 500px;
