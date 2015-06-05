@@ -25400,24 +25400,6 @@ module.exports = IDBMap =  function(elid, options, popupContent){
         div+='</div>';
         $('#legend').html(div);
     }
-    /*
-    * Event Actions
-    ***/
-
-    this.map.on('zoomend',function(e){
-        /*if(typeof legend == 'object'){
-            self.map.removeControl(legend);
-            if(typeof self.map.mapCode != 'undefined'){
-                self.map.addControl(legend)
-            }
-        }*/
-        if(typeof idblayer == 'object'){
-            self.map.removeLayer(removeIdblayer());
-            if(typeof self.map.resp != 'undefined'){
-                self.map.addLayer(makeIdblayer(self.map.resp.tiles))
-            }
-        }
-    })
 
 }
 },{"../../../../bower_components/leaflet-loading/src/Control.Loading":1,"./idbapi":8,"async":2,"chroma-js":3,"jquery":4,"leaflet/dist/leaflet":5,"lodash":6}],10:[function(require,module,exports){

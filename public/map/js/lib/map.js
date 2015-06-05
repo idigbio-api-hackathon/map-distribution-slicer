@@ -155,23 +155,5 @@ module.exports = IDBMap =  function(elid, options, popupContent){
         div+='</div>';
         $('#legend').html(div);
     }
-    /*
-    * Event Actions
-    ***/
-
-    this.map.on('zoomend',function(e){
-        /*if(typeof legend == 'object'){
-            self.map.removeControl(legend);
-            if(typeof self.map.mapCode != 'undefined'){
-                self.map.addControl(legend)
-            }
-        }*/
-        if(typeof idblayer == 'object'){
-            self.map.removeLayer(removeIdblayer());
-            if(typeof self.map.resp != 'undefined'){
-                self.map.addLayer(makeIdblayer(self.map.resp.tiles))
-            }
-        }
-    })
 
 }
