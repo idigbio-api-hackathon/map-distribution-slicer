@@ -5,6 +5,9 @@
   <title>Map Species Distribution Time Slicer</title>
   <!-- CSS  -->
   <script src="/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
   <link href="/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/css/leaflet.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript">
@@ -24,6 +27,25 @@
               map.query(q, [date1,date2],5);
 
           });
+
+
+              $( "#date_1" ).datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+                  numberOfMonths: 6,
+                  onClose: function( selectedDate ) {
+                      $( "#date_1" ).datepicker( "option", "minDate", selectedDate );
+                  }
+              });
+              $( "#date_2" ).datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+                  numberOfMonths: 6,
+                  onClose: function( selectedDate ) {
+                      $( "#date_2" ).datepicker( "option", "maxDate", selectedDate );
+                  }
+              });
+
 
 
 
@@ -49,8 +71,10 @@
         <label>Family</label>
         <input class="input" id= 'family'>
 
-        <label>Date Range:</label>
-        <input class="input" id='date_1'>
+        <label>Date Range:</label><br>
+         From:
+        <input class="input" id='date_1'><br>
+         To:
         <input class="input" id="date_2">
 
         <br>

@@ -9,7 +9,7 @@ label
 {
   clear: both;
   display: block;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin: 0 0 5px 0;
 }
@@ -41,6 +41,21 @@ label
 }
 
 
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
 
 button
 {
@@ -60,6 +75,10 @@ button
     text-align: center;
 }
 
+div#ui-datepicker-div
+{
+
+}
 
 #header
 {
