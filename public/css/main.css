@@ -13,6 +13,10 @@
   margin: 0 0 5px 0;
 }
 
+#mapping{
+  float:left;
+  width:300px;
+}
 .title
 {
     font-weight: 600;
@@ -107,11 +111,13 @@ select
 }
 
 #map {
-  width: 800px;
-  height: 500px;
+  width: 700px;
+  height: 400px;
+  float:right;
 }
 #legend{
-  width:800px;
+  width:700px;
+  float:right;
 }
 #legend-block .color {
   display: inline-block;
