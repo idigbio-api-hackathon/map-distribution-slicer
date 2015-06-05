@@ -16,21 +16,22 @@
           var map = new mapper('map');
           $('#submitbutton').click(function(e){
                   e.preventDefault();
-              
+
               var genus = document.getElementById("genus").value;
               var family = document.getElementById("family").value;
               var species = document.getElementById("species").value;
-              var date1 = document.getElementById("date_1").value;
-              var date2 = document.getElementById("date_2").value;
+              var date1 = document.getElementById("initial_date").value;
+              var date2 = document.getElementById("end_date").value;
+              var years = document.getElementById("years").value;
               
               var q = {"genus":genus, "family":family, "specificepithet":species};
               
-              map.query(q, [date1,date2],5);
+              map.query(q, [date1,date2],parseInt(years));
 
           });
 
 
-              $( "#date_1" ).datepicker({
+              $( "#initial_date" ).datepicker({
                   dateFormat: 'yy-mm-dd',
                   yearRange: "1900:2015",
                   defaultDate: "+1w",
@@ -38,10 +39,10 @@
                   changeYear: true,
                   numberOfMonths: 5,
                   onClose: function( selectedDate ) {
-                      $( "#date_1" ).datepicker( "option", "minDate", selectedDate );
+                      $( "#initial_date" ).datepicker( "option", "minDate", selectedDate );
                   }
               });
-              $( "#date_2" ).datepicker({
+              $( "#end_date" ).datepicker({
                   dateFormat: 'yy-mm-dd',
                   yearRange: "1900:2015",
                   defaultDate: "+1w",
@@ -49,17 +50,10 @@
                   changeYear: true,
                   numberOfMonths: 5,
                   onClose: function( selectedDate ) {
-                      $( "#date_2" ).datepicker( "option", "maxDate", selectedDate );
+                      $( "#end_date" ).datepicker( "option", "maxDate", selectedDate );
                   }
               });
-
-
-
-
-
-
-
-
+          
       })
   </script>
 </head>
@@ -86,9 +80,11 @@
 
         <label>Date Range</label><br>
          From:
-        <input class="input" id='date_1' required><br>
+        <input class="input" id='initial_date'><br>
          To:
-        <input class="input" id="date_2" required>
+        <input class="input" id="end_date"><br>
+         Amount of Years:
+        <input class="input" id="years"><br>
 
         <br>
 

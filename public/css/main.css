@@ -84,9 +84,12 @@ button
     margin-bottom: 50px;
 }
 
-div#ui-datepicker-div
-{
 
+select
+{
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    -o-appearance: menulist;
 }
 
 #header
