@@ -30,17 +30,21 @@
 
 
               $( "#date_1" ).datepicker({
+                  dateFormat: 'yy-mm-dd',
                   defaultDate: "+1w",
                   changeMonth: true,
-                  numberOfMonths: 6,
+                  changeYear: true,
+                  numberOfMonths: 5,
                   onClose: function( selectedDate ) {
                       $( "#date_1" ).datepicker( "option", "minDate", selectedDate );
                   }
               });
               $( "#date_2" ).datepicker({
+                  dateFormat: 'yy-mm-dd',
                   defaultDate: "+1w",
                   changeMonth: true,
-                  numberOfMonths: 6,
+                  changeYear: true,
+                  numberOfMonths: 5,
                   onClose: function( selectedDate ) {
                       $( "#date_2" ).datepicker( "option", "maxDate", selectedDate );
                   }
@@ -71,7 +75,7 @@
         <label>Family</label>
         <input class="input" id= 'family'>
 
-        <label>Date Range:</label><br>
+        <label>Date Range</label><br>
          From:
         <input class="input" id='date_1'><br>
          To:
@@ -80,7 +84,7 @@
         <br>
 
         <button id="submitbutton" value="submit">Submit</button>
-            <br>
+        <br>
 
         </form>
 
