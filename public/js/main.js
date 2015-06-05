@@ -25363,6 +25363,7 @@ module.exports = IDBMap =  function(elid, options, popupContent){
         layers.forEach(function(l){
             layerControl.removeLayer(l);
         })
+        $('#legend').html('');
         var  color = chroma.scale('RdYlBu'), cnt=1, colors={};
         var split = 1/queries.length;
         layerGroup.clearLayers();
