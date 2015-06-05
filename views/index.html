@@ -25,12 +25,39 @@
               var end_date = document.getElementById("end_date").value;
               var years = document.getElementById("years").value
 
-              if(initial_date =="" && end_date=="") {
+              if(initial_date == "" && end_date == "")
+              {
                   alert("Please enter a date range.")
                   return false;
               }
-              
-              var q = {"genus":genus, "family":family, "specificepithet":species};
+
+              if (years == "")
+              {
+                  alert("Please enter the interval of years.")
+                  return false;
+              }
+
+              var q = {};
+
+
+              if(genus != "")
+              {
+                  q["genus"] = genus;
+              }
+
+              if(family != "")
+              {
+                  q['family'] = family;
+              }
+
+              if(species != "")
+              {
+                  q['specificepithet'] =  species;
+
+              }
+
+
+//            var q = {"genus":genus, "family":family, "specificepithet":species};
               
               map.query(q, [initial_date,end_date],parseInt(years));
 
@@ -90,7 +117,7 @@
         <label>To:</label>
         <input class="input" id="end_date">
 
-        <label>Amount of Years:</label>
+        <label>Interval of Years:</label>
         <input class="input" id="years">
 
         <br>
